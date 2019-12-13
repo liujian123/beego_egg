@@ -1,0 +1,44 @@
+{
+  "pink": {
+    "xunfei": {
+      "ios": {
+        "appid": "5ad5a047",
+        "appname": "粉粉日记",
+        "pkgname": "com.xxtstudio.iosdev",
+        "appver": "6.0.0",
+        "pos": {
+          "SCREEN": "309B880F4168F5759A115076CC30324C"
+        }
+      },
+      "android": {
+        "appid": "58f5aeae",
+        "appname": "粉粉日记",
+        "pkgname": "pinkdiary.xiaoxiaotu.com",
+        "appver": "6.00",
+        "pos": {
+          "SCREEN": "07D08B5AF7BB576B705D812D1860A8C7"
+        }
+      }
+    },
+    "meiyou": {
+      "ios": {
+        "appid": "5ad5a047",
+        "appname": "粉粉日记",
+        "pkgname": "com.xxtstudio.iosdev",
+        "appver": "6.0.0",
+        "pos": {
+          "SCREEN": "309B880F4168F5759A115076CC30324C"
+        }
+      },
+      "android": {
+        "appid": "58f5aeae",
+        "appname": "粉粉日记",
+        "pkgname": "pinkdiary.xiaoxiaotu.com",
+        "appver": "6.00",
+        "pos": {
+          "SCREEN": "07D08B5AF7BB576B705D812D1860A8C7"
+        }
+      }
+    }
+  }
+}
