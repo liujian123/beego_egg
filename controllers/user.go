@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"apiproject/models"
-	"apiproject/utils"
+	"beego_egg/models"
+	"beego_egg/utils"
 	"fmt"
 	"strings"
 	"time"

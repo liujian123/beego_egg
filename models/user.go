@@ -91,7 +91,6 @@ func (this *EggUser) GetUserByNameAndPwd(username, password string) (user *EggUs
 		UserName: username,
 		UserPwd:  password,
 	}
-	fmt.Println("user:::::", user)
 	if err = DB.Read(user, "UserName", "UserPwd"); err != nil {
 		if err == orm.ErrNoRows {
 			err = errors.New("用户名或密码错误!")
@@ -315,9 +314,7 @@ func (this *EggUser) GetBalanceList(query map[string]string, fields []string, so
 
 func SyncMsg() {
 	for {
-		fmt.Println("MsgChan::::::start")
 		msg, ok := <-MsgChan
-		fmt.Println("MsgChan::::::end", msg)
 		if !ok {
 			time.Sleep(time.Millisecond * 100) // 停止100毫秒
 			continue
@@ -329,14 +326,13 @@ func SyncMsg() {
 			conn.Close()
 			continue
 		}
-		strMsg := "恭喜" + msg.UserName + "在" + msg.CreateTime + " 出售鸡蛋"
-		fmt.Println("msgs_num::::::", msgs_num)
+		strMsg := `"` + "恭喜" + msg.UserName + "在" + msg.CreateTime + " 出售鸡蛋" + `"`
 		if msgs_num >= 20 {
 			fmt.Println("阻塞等待返回::::::", msgs_num)
 			//todo 阻塞等待返回，设置超时时间直接返回
-			reply, err := conn.Do("BRPOP", "eggs:msg1", 1)
+			reply, err := conn.Do("BRPOP", "eggs:msg", 1)
 			data, err := redis.Strings(reply, err)
-			fmt.Println("data:::::", data)
+			fmt.Println(data)
 			if err == redis.ErrNil {
 				logs.Warn("[SyncMsg] 未pop出数据")
 			}
@@ -344,6 +340,8 @@ func SyncMsg() {
 		_, err = conn.Do("LPUSH", key, strMsg)
 		MsgList = append(MsgList, strMsg)
 		conn.Close()
+		//推送给所有的在线链接（客户端）
+		G_merger.broadcastWorker.PushAll(json.RawMessage(strMsg))
 	}
 }
 

@@ -8,9 +8,9 @@
 package routers
 
 import (
-	"apiproject/controllers"
-	_ "apiproject/models"
-	"apiproject/utils"
+	"beego_egg/controllers"
+	_ "beego_egg/models"
+	"beego_egg/utils"
 	"fmt"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/context"
@@ -23,6 +23,7 @@ func init() {
 	beego.Router("/user/collect", &controllers.UserController{}, "post:Collect")
 	beego.Router("/user/withdraw", &controllers.UserController{}, "post:Withdraw")
 	beego.Router("/user/balance", &controllers.UserController{}, "get:Balance")
+	beego.Router("/connect", &controllers.WsSocketController{}, "*:HandleConnect")
 	beego.InsertFilter("/user/*", beego.BeforeRouter, FilterAuthorization)
 }
 
