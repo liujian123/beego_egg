@@ -6,6 +6,7 @@ import (
 	"github.com/astaxie/beego/config"
 	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/garyburd/redigo/redis"
 	"time"
 )
